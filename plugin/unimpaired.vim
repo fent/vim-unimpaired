@@ -216,18 +216,19 @@ endfunction
 function! s:Move(cmd, count, map) abort
   call s:ExecMove('move'.a:cmd.a:count)
   silent! call repeat#set("\<Plug>unimpairedMove".a:map, a:count)
+  normal! ==
 endfunction
 
 function! s:MoveSelectionUp(count) abort
   call s:ExecMove("'<,'>move'<--".a:count)
   silent! call repeat#set("\<Plug>unimpairedMoveSelectionUp", a:count)
-  normal! gv
+  normal! gv=gv
 endfunction
 
 function! s:MoveSelectionDown(count) abort
   call s:ExecMove("'<,'>move'>+".a:count)
   silent! call repeat#set("\<Plug>unimpairedMoveSelectionDown", a:count)
-  normal! gv
+  normal! gv=gv
 endfunction
 
 nnoremap <silent> <Plug>unimpairedMoveUp            :<C-U>call <SID>Move('--',v:count1,'Up')<CR>
